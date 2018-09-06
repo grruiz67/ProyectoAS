@@ -1,0 +1,83 @@
+﻿@model ProyectoAS.Models.ESTUDIANTE
+
+@{
+    ViewBag.Title = "Detalle de Estudiante";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            TIPO DOCUMENTO
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TIPO_DOC.ABREVIATURA)
+        </dd>
+        <dt>
+            IDENTIFICACIÓN
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NUMERO_IDENTIFICACION)
+        </dd>
+
+        <dt>
+            PRIMER NOMBRE
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRIMER_NOMBRE)
+        </dd>
+
+        <dt>
+            SEGUNDO NOMBRE
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SEGUNDO_NOMBRE)
+        </dd>
+
+        <dt>
+            PRIMER APELLIDO
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PRIMER_APELLIDO)
+        </dd>
+
+        <dt>
+            SEGUNDO APELLIDO
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SEGUNDO_APELLIDO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CELULAR)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CELULAR)
+        </dd>
+
+        <dt>
+            GENERO
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GENERO.ABREVIATURA)
+        </dd>
+
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.ID_ESTUDIANTE }) |
+    @Html.ActionLink("Regresar a lista", "Index")
+</p>

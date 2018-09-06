@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ArquitecturaSoftwareModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ESTUDIANTE">
+          <Key>
+            <PropertyRef Name="ID_ESTUDIANTE" />
+          </Key>
+          <Property Name="ID_ESTUDIANTE" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_TIPO_DOC" Type="bigint" Nullable="false" />
+          <Property Name="NUMERO_IDENTIFICACION" Type="varchar" MaxLength="50" />
+          <Property Name="PRIMER_NOMBRE" Type="varchar" MaxLength="50" />
+          <Property Name="SEGUNDO_NOMBRE" Type="varchar" MaxLength="50" />
+          <Property Name="PRIMER_APELLIDO" Type="varchar" MaxLength="50" />
+          <Property Name="SEGUNDO_APELLIDO" Type="varchar" MaxLength="50" />
+          <Property Name="ID_GENERO" Type="bigint" />
+          <Property Name="CELULAR" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="GENERO">
+          <Key>
+            <PropertyRef Name="ID_GENERO" />
+          </Key>
+          <Property Name="ID_GENERO" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ABREVIATURA" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPO_DOC">
+          <Key>
+            <PropertyRef Name="ID_TIPO_DOC" />
+          </Key>
+          <Property Name="ID_TIPO_DOC" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ABREVIATURA" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ESTUDIANTE_GENERO">
+          <End Role="GENERO" Type="Self.GENERO" Multiplicity="0..1" />
+          <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GENERO">
+              <PropertyRef Name="ID_GENERO" />
+            </Principal>
+            <Dependent Role="ESTUDIANTE">
+              <PropertyRef Name="ID_GENERO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ESTUDIANTE_TIPO_DOC">
+          <End Role="TIPO_DOC" Type="Self.TIPO_DOC" Multiplicity="1" />
+          <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_DOC">
+              <PropertyRef Name="ID_TIPO_DOC" />
+            </Principal>
+            <Dependent Role="ESTUDIANTE">
+              <PropertyRef Name="ID_TIPO_DOC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ArquitecturaSoftwareModelStoreContainer">
+          <EntitySet Name="ESTUDIANTE" EntityType="Self.ESTUDIANTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GENERO" EntityType="Self.GENERO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPO_DOC" EntityType="Self.TIPO_DOC" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ESTUDIANTE_GENERO" Association="Self.FK_ESTUDIANTE_GENERO">
+            <End Role="GENERO" EntitySet="GENERO" />
+            <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ESTUDIANTE_TIPO_DOC" Association="Self.FK_ESTUDIANTE_TIPO_DOC">
+            <End Role="TIPO_DOC" EntitySet="TIPO_DOC" />
+            <End Role="ESTUDIANTE" EntitySet="ESTUDIANTE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ArquitecturaSoftwareModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ESTUDIANTE">
+          <Key>
+            <PropertyRef Name="ID_ESTUDIANTE" />
+          </Key>
+          <Property Name="ID_ESTUDIANTE" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_TIPO_DOC" Type="Int64" Nullable="false" />
+          <Property Name="NUMERO_IDENTIFICACION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PRIMER_NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SEGUNDO_NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PRIMER_APELLIDO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SEGUNDO_APELLIDO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID_GENERO" Type="Int64" />
+          <Property Name="CELULAR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GENERO" Relationship="Self.FK_ESTUDIANTE_GENERO" FromRole="ESTUDIANTE" ToRole="GENERO" />
+          <NavigationProperty Name="TIPO_DOC" Relationship="Self.FK_ESTUDIANTE_TIPO_DOC" FromRole="ESTUDIANTE" ToRole="TIPO_DOC" />
+        </EntityType>
+        <EntityType Name="GENERO">
+          <Key>
+            <PropertyRef Name="ID_GENERO" />
+          </Key>
+          <Property Name="ID_GENERO" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ABREVIATURA" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ESTUDIANTEs" Relationship="Self.FK_ESTUDIANTE_GENERO" FromRole="GENERO" ToRole="ESTUDIANTE" />
+        </EntityType>
+        <EntityType Name="TIPO_DOC">
+          <Key>
+            <PropertyRef Name="ID_TIPO_DOC" />
+          </Key>
+          <Property Name="ID_TIPO_DOC" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ABREVIATURA" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ESTUDIANTEs" Relationship="Self.FK_ESTUDIANTE_TIPO_DOC" FromRole="TIPO_DOC" ToRole="ESTUDIANTE" />
+        </EntityType>
+        <Association Name="FK_ESTUDIANTE_GENERO">
+          <End Role="GENERO" Type="Self.GENERO" Multiplicity="0..1" />
+          <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GENERO">
+              <PropertyRef Name="ID_GENERO" />
+            </Principal>
+            <Dependent Role="ESTUDIANTE">
+              <PropertyRef Name="ID_GENERO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ESTUDIANTE_TIPO_DOC">
+          <End Role="TIPO_DOC" Type="Self.TIPO_DOC" Multiplicity="1" />
+          <End Role="ESTUDIANTE" Type="Self.ESTUDIANTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_DOC">
+              <PropertyRef Name="ID_TIPO_DOC" />
+            </Principal>
+            <Dependent Role="ESTUDIANTE">
+              <PropertyRef Name="ID_TIPO_DOC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ArquitecturaSoftwareEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ESTUDIANTEs" EntityType="Self.ESTUDIANTE" />
+          <EntitySet Name="GENEROes" EntityType="Self.GENERO" />
+          <EntitySet Name="TIPO_DOC" EntityType="Self.TIPO_DOC" />
+          <AssociationSet Name="FK_ESTUDIANTE_GENERO" Association="Self.FK_ESTUDIANTE_GENERO">
+            <End Role="GENERO" EntitySet="GENEROes" />
+            <End Role="ESTUDIANTE" EntitySet="ESTUDIANTEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ESTUDIANTE_TIPO_DOC" Association="Self.FK_ESTUDIANTE_TIPO_DOC">
+            <End Role="TIPO_DOC" EntitySet="TIPO_DOC" />
+            <End Role="ESTUDIANTE" EntitySet="ESTUDIANTEs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ArquitecturaSoftwareModelStoreContainer" CdmEntityContainer="ArquitecturaSoftwareEntities">
+          <EntitySetMapping Name="ESTUDIANTEs">
+            <EntityTypeMapping TypeName="ArquitecturaSoftwareModel.ESTUDIANTE">
+              <MappingFragment StoreEntitySet="ESTUDIANTE">
+                <ScalarProperty Name="ID_ESTUDIANTE" ColumnName="ID_ESTUDIANTE" />
+                <ScalarProperty Name="ID_TIPO_DOC" ColumnName="ID_TIPO_DOC" />
+                <ScalarProperty Name="NUMERO_IDENTIFICACION" ColumnName="NUMERO_IDENTIFICACION" />
+                <ScalarProperty Name="PRIMER_NOMBRE" ColumnName="PRIMER_NOMBRE" />
+                <ScalarProperty Name="SEGUNDO_NOMBRE" ColumnName="SEGUNDO_NOMBRE" />
+                <ScalarProperty Name="PRIMER_APELLIDO" ColumnName="PRIMER_APELLIDO" />
+                <ScalarProperty Name="SEGUNDO_APELLIDO" ColumnName="SEGUNDO_APELLIDO" />
+                <ScalarProperty Name="ID_GENERO" ColumnName="ID_GENERO" />
+                <ScalarProperty Name="CELULAR" ColumnName="CELULAR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GENEROes">
+            <EntityTypeMapping TypeName="ArquitecturaSoftwareModel.GENERO">
+              <MappingFragment StoreEntitySet="GENERO">
+                <ScalarProperty Name="ID_GENERO" ColumnName="ID_GENERO" />
+                <ScalarProperty Name="ABREVIATURA" ColumnName="ABREVIATURA" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_DOC">
+            <EntityTypeMapping TypeName="ArquitecturaSoftwareModel.TIPO_DOC">
+              <MappingFragment StoreEntitySet="TIPO_DOC">
+                <ScalarProperty Name="ID_TIPO_DOC" ColumnName="ID_TIPO_DOC" />
+                <ScalarProperty Name="ABREVIATURA" ColumnName="ABREVIATURA" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

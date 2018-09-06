@@ -1,0 +1,77 @@
+﻿@model IEnumerable<ProyectoAS.Models.ESTUDIANTE>
+
+@{
+    ViewBag.Title = "Listado de Estudiantes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Crear Estudiante", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            TIPO DOCUMENTO
+        </th>
+        <th>
+            IDENTIFICACIÓN
+        </th>
+        <th>
+            PRIMER NOMBRE
+        </th>
+        <th>
+            SEGUNDO NOMBRE
+        </th>
+        <th>
+            PRIMER APELLIDO
+        </th>
+        <th>
+            SEGUNDO APELLIDO
+        </th>
+        <th>
+            CELULAR
+        </th>
+        <th>
+            GENERO
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TIPO_DOC.ABREVIATURA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NUMERO_IDENTIFICACION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRIMER_NOMBRE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SEGUNDO_NOMBRE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRIMER_APELLIDO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SEGUNDO_APELLIDO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CELULAR)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GENERO.ABREVIATURA)
+        </td>
+
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id = item.ID_ESTUDIANTE }) |
+            @Html.ActionLink("Detalle", "Details", new { id = item.ID_ESTUDIANTE }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id = item.ID_ESTUDIANTE })
+        </td>
+    </tr>
+}
+
+</table>
